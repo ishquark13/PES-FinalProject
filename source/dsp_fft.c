@@ -129,11 +129,6 @@ int16_t* dsp_fft_mag(uint16_t* samples, int nsamples) {
   // https://www.keil.com/pack/doc/CMSIS/DSP/html/group__RealFFT.html
   arm_rfft_q15(&fft_q15_ctx, (q15_t*)FFT_input, (q15_t*)FFT_output);
 
-//  // FFT OUTPUT FOR DEBUG:
-//  for (int i=0; i<MAXSAMPLES*2; i++) {
-//    printf("%d, %d\r\n", i/2, FFT_output[i]);
-//  }
-
   // compute the power of the signal
   arm_cmplx_mag_squared_q15((q15_t*) FFT_output, (q15_t*) FFT_mag, nsamples);
 
