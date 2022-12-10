@@ -2,7 +2,7 @@
 This is a Project that intends to capture an overview of all the knowledge from ECEN 5813 at CU
 My project contains the following functionality:
 
-A real-time PDA (Pitch Detection Algorithm) implemented using the CMSIS math library
+A real-time PDA (Pitch Detection Algorithm) implemented using the CMSIS math library.
 Originally, the idea was to detect how far away the input frequency was from the
 target frequency; however, there are some limitations of using the arm_fft API.
 I will go over some design changes that needed to be implemented during development.
@@ -18,6 +18,7 @@ using a predetermined amount of samples (512)
 Nyquist rate.
 
 4. The External Microphone Circuit I used needed some additional gain --> 60dB to accurately bias the ADC.
+I had to desolder and rework the pre-amplifier circuit on my PCB by adding a resistor bridge and a capacitor to increase the gain, but not create signal clipping.
 
 With the above shortcomings, I was still able to implement a reasonably quick PDA that
 is capable of finding the formants (Spectral Maximum in Human Speech) by using vocal samples
@@ -38,11 +39,10 @@ among those I was successfull in programming were:
 
 ## Learning and Theory:
 I learned plenty about how powerful this ARM chip really is, I didnt have any performance
-issues considering this project is computationally expensive.
+issues considering this project is computationally expensive. I also achieved my goal of utilizing this course to bolster my embedded DSP knowledge.
 
 ## Hardware:
-External Electret Microphone with additional hardware to compensate and condition the input signal
-into the ADC
+External Electret Microphone with additional hardware to compensate and condition the input signal into the ADC.
 
 ## Testing: 
 Most of my rigorous testing came from ensuring the Hardware was capable of capturing an incoming audio
