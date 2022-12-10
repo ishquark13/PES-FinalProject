@@ -5,7 +5,7 @@
  * @brief	double buffering using the DMA0 channel, additionally, the DMA0 us used as
  * 			a "shadow register" during signal processing hand-off
  *
- * Single ended 16-bit analog samples are recorded from KL25Z PortC, Pin0 (PTC1)
+ * Single ended 16-bit analog samples are recorded from KL25Z PortC, Pin1 (PTC1)
  *
  * @author  Ishmael Pelayo
  * @date    12-09-2022
