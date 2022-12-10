@@ -71,11 +71,6 @@ int main(void) {
 		  // 1D transform of current signal's power spectrum
 		  fft_mags = dsp_fft_mag(samples, 512);
 
-		  // DEBUG: print out magnitudes and correlate with Freq
-//		  for (int i=0; i<32; i++) {
-//					printf("%d, FFT MAGNITUDES: %d\r\n", i, fft_mags[i]);
-//				  }
-
 		  // compute the current bin number of the FFT that contains most energy (PARSEVAL THM)
 		  current_bin = dsp_fft_max_pitch(fft_mags);
 
