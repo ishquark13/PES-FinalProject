@@ -53,7 +53,7 @@ a discrete sample of an incoming 1000Hz pure sine-wave. I then used the function
 dsp_fft.c/dsp_fft.h module to compute FFT, harmonic attenuation, and fundamental pitch.
 
 ## Video Demonstration
-In this [video](https://drive.google.com/file/d/1hq2BiEaZ3l_sd2rOej84emOdMpbxx10Y/view?usp=sharing) I go over the basic usage of my Final Project!
-**NOTE: In the end of the demo, I play a pure-tone of frequency A440Hz -- this is not to be confused with pitch of 440Hz. In general pitch is compartmentalized
-in distinct formants, see [here](https://en.wikipedia.org/wiki/Formant)
+In this [video](https://drive.google.com/file/d/1hq2BiEaZ3l_sd2rOej84emOdMpbxx10Y/view?usp=sharing) I go over the basic usage of my Final Project!   
+**NOTE: In the end of the demo, I play a pure-tone of frequency A440Hz -- this is not to be confused with pitch of 440Hz.**   
+In general pitch is compartmentalized in distinct formants, see [here](https://en.wikipedia.org/wiki/Formant)  
 the target formant in this demo being 400Hz.
