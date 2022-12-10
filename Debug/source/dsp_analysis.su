@@ -1,0 +1,4 @@
+../source/dsp_analysis.c:37:5:dsp_find_peaks	40	static
+../source/dsp_analysis.c:67:10:dsp_max_pitch	24	static
+../source/dsp_analysis.c:92:6:dsp_pitch_detect	16	static
+../source/dsp_analysis.c:126:10:dsp_fft_mag	136	dynamic

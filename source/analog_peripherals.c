@@ -1,12 +1,14 @@
-/* -----------------------------------------------------------------------------
+/*
  * analog_peripherals.c
- * This file contains the initialization of the ADC0 and DMA0 to interface
+ * This file contains the initialization of the ADC0, TPM0, and DMA0 to interface
  * with the external microphone circuit
  * via single ended 16-bit configuration on the KL25Z PortC, Pin1 (PTC1)
  *
  * @author  Ishmael Pelayo
  * @date    2022-12-01
- * -----------------------------------------------------------------------------
+ * @rev		1.2
+ *
+ * references: https://stm32f4-discovery.net/2015/06/how-to-properly-enabledisable-interrupts-in-arm-cortex-m/
  */
 
 #include <analog_peripherals.h>
@@ -23,7 +25,7 @@
 #define END_CRITICAL_SECTION \
           __set_PRIMASK(masking_state)
 
-#define ADC_SAMPLING_FREQ  (48000U) // in Hz
+#define ADC_SAMPLING_FREQ  (8192U) // Frequency in Hz
 #define ADC_MAX_SAMPLES    (512)  
 
 
@@ -34,13 +36,13 @@ static uint16_t adc_pong[ADC_MAX_SAMPLES]; // B
 static volatile bool adc_ping_active;
 static volatile bool adc_pong_full;
 
-// see .h for more details
+// initializes the analog module to a known state using internal/public functions
 void analog_init() {
 
   // init dma0, tpm0, adc0
-  _init_dma0();
-  _init_tpm0();
-  _init_adc0();
+  init_dma0();
+  init_tpm0();
+  init_adc0();
 
   // DMA sets the PING side of the double buffer to be filled first
   adc_ping_active = true;
@@ -69,6 +71,7 @@ uint16_t* get_samples() {
   // the return buffer:
   uint16_t* process_buffer_return;
 
+  // disable interrupts when swapping buffers
   START_CRITICAL_SECTION;
 
   // change the order of the ping-pong buffers
@@ -93,6 +96,7 @@ uint16_t* get_samples() {
   DMA0->DMA[0].DSR_BCR |= DMA_DSR_BCR_BCR(2*ADC_MAX_SAMPLES);
   DMA0->DMA[0].DCR |= DMA_DCR_ERQ_MASK;
 
+  // restore context and interrupt priority
   END_CRITICAL_SECTION;
 
   // return buffer for processing
@@ -108,7 +112,7 @@ void DMA0_IRQHandler() {
 }
 
 // ADC0 initialized similar to Lab7, except we are using a different pin
-void _init_adc0() {
+void init_adc0() {
   // enable clock gating
   SIM->SCGC6 |= SIM_SCGC6_ADC0_MASK;
   // enable alternate trigger pg. 201
@@ -131,7 +135,7 @@ void _init_adc0() {
 
   // set adc0 input to SE15
   // PORTC1
-  // AIEN and DIFF
+  // AIEN and DIFF set to standard configuration
   ADC0->SC1[0] = ADC_SC1_ADCH(15) | ADC_SC1_AIEN(0) | ADC_SC1_DIFF(0);
 
   // run calibration datasheet sec 28.4.6:
@@ -164,7 +168,7 @@ void _init_adc0() {
 #define DMA_ADC0_COCO_TRIG  (40)
 
 // DMA0 initialized similar to Lab7, except we are using ADC0 rather than DAC0
-void _init_dma0() {
+void init_dma0() {
   // enable clock gating to DMA
   SIM->SCGC7 |= SIM_SCGC7_DMA_MASK;
   SIM->SCGC6 |= SIM_SCGC6_DMAMUX_MASK;
@@ -207,7 +211,7 @@ void _init_dma0() {
 
 #define TPM0_CLK_INPUT_FREQ (48000000UL) // 48 MHz
 // TPM0 module sets the sampling frequency for the ADC0 at 48000Khz (Studio Quality)
-void _init_tpm0() {
+void init_tpm0() {
 
   // configure clock gating for tpm0 on scgc6
   SIM->SCGC6 |= SIM_SCGC6_TPM0_MASK; 

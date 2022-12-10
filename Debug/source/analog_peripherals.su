@@ -1,0 +1,10 @@
+/Users/ip/MCUX/ECEN5813_FinalProject/CMSIS/core_cm0plus.h:745:22:NVIC_EnableIRQ	16	static
+/Users/ip/MCUX/ECEN5813_FinalProject/CMSIS/core_cm0plus.h:791:22:NVIC_ClearPendingIRQ	16	static
+/Users/ip/MCUX/ECEN5813_FinalProject/CMSIS/core_cm0plus.h:804:22:NVIC_SetPriority	24	static
+../source/analog_peripherals.c:38:6:analog_init	8	static
+../source/analog_peripherals.c:55:6:is_adc_pong_full	8	static
+../source/analog_peripherals.c:61:11:get_samples	24	static
+../source/analog_peripherals.c:105:6:DMA0_IRQHandler	8	static
+../source/analog_peripherals.c:113:6:init_adc0	16	static
+../source/analog_peripherals.c:169:6:init_dma0	8	static
+../source/analog_peripherals.c:212:6:init_tpm0	8	static

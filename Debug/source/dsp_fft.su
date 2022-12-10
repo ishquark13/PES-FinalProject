@@ -1,0 +1,3 @@
+../source/dsp_fft.c:36:10:dsp_fft_max_pitch	24	static
+../source/dsp_fft.c:66:6:dsp_fft_pitch_detect	16	static
+../source/dsp_fft.c:104:10:dsp_fft_mag	136	dynamic

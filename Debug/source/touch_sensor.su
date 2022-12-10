@@ -1,0 +1,6 @@
+../source/common.h:11:20:enable_irq	16	static
+../source/touch_sensor.c:21:5:touch_data	16	static
+../source/touch_sensor.c:27:20:scan_start	16	static
+../source/touch_sensor.c:33:24:scan_data	8	static
+../source/touch_sensor.c:40:6:touch_sensor_init	24	static
+../source/touch_sensor.c:83:6:TSI0_IRQHandler	16	static
